@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mobimore.controller.MainController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <SplitPane dividerPositions="0.2, 0.8" VBox.vgrow="ALWAYS">
+         <items>
+            <ListView fx:id="experimentNamesList" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+            <StackPane fx:id="stackPaneWithGraph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0">
+               <children>
+                  <SubScene fx:id="graphSubScene" cache="true" cacheHint="QUALITY" depthBuffer="true" depthTest="DISABLE" fill="BLACK" height="500.0" width="500.0" StackPane.alignment="TOP_LEFT">
+                    <root>
+                      <Group />
+                    </root>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </SubScene>
+               </children>
+            </StackPane>
+            <Accordion maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" SplitPane.resizableWithParent="false">
+              <panes>
+                <TitledPane animated="false" text="Colors">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <TableView layoutX="-36.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
+         </items>
+      </SplitPane>
+  </children>
+</VBox>

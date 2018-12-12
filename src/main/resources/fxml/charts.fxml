@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="stackPaneWithGraph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mobimore.controller.ChartsController">
+   <children>
+      <SubScene fx:id="graphSubScene" cache="true" cacheHint="QUALITY" depthBuffer="true" depthTest="DISABLE" fill="BLACK" height="500.0" width="500.0" StackPane.alignment="TOP_LEFT">
+        <root>
+          <Group />
+        </root>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </SubScene>
+   </children>
+</StackPane>
