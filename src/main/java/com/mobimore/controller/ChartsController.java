@@ -129,7 +129,6 @@ public class ChartsController {
             double z = camera.getTranslateZ();
             double newZ = z + e.getDeltaY() * modifierFactor * modifier;
             camera.setTranslateZ(newZ);
-            System.out.println(newZ);
         });
     }
 
@@ -163,12 +162,13 @@ public class ChartsController {
         graphSubScene.setCamera(camera);
     }
 
-    private void resetPlot(){
+    public void resetPlot(){
         setupCameraAndLight();
         ((Group) graphSubScene.getRoot()).getChildren().clear();
     }
 
-    private void buildPlot(ExperimentsData data, int experimentNumber) {
+    public void buildPlot(ExperimentsData data, int experimentNumber) {
+        resetPlot();
         final int genesCount = data.getGen().size();
 
         /*CubeWorld world = new CubeWorld(genesCount*2*MULTIPLIER, 3*MULTIPLIER, false);
@@ -232,6 +232,7 @@ public class ChartsController {
         /*final Group group = new Group();
         group.getChildren().addAll(world, crosshair3D, plot);*/
         ((Group) graphSubScene.getRoot()).getChildren().addAll(/*world,*/ crosshair3D, plot);
+        graphSubScene.requestFocus();
     }
 
     private static List<Color> generateColors(int count) {
