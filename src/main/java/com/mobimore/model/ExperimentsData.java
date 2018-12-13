@@ -1,4 +1,5 @@
 package com.mobimore.model;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -30,7 +31,7 @@ public class ExperimentsData {
     }
 
     public List<String> getGen() {
-        return gen;
+        return new ArrayList<>(gen);
     }
 
     public void setGen(List<String> gen) {
@@ -38,7 +39,7 @@ public class ExperimentsData {
     }
 
     public List<String> getSamples() {
-        return samples;
+        return new ArrayList<>(samples);
     }
 
     public void setSamples(List<String> samples) {
@@ -46,7 +47,7 @@ public class ExperimentsData {
     }
 
     public List<String> getTime() {
-        return time;
+        return new ArrayList<>(time);
     }
 
     public void setTime(List<String> time) {

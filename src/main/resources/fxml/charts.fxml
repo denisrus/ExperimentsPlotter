@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 
 <StackPane fx:id="stackPaneWithGraph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mobimore.controller.ChartsController">
@@ -15,5 +16,6 @@
             <Insets />
          </StackPane.margin>
       </SubScene>
+      <Label fx:id="pointInformation" alignment="TOP_CENTER" textFill="WHITE" StackPane.alignment="TOP_LEFT" />
    </children>
 </StackPane>
