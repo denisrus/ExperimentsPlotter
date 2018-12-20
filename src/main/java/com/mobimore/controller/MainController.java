@@ -40,7 +40,7 @@ public class MainController {
     private ExperimentsData data;
 
     private final Integer[] SIZES = {10, 25, 50, 100, 200};
-    private ObservableList<Integer> sizesList= FXCollections.observableArrayList();
+    private ObservableList<Integer> sizesList = FXCollections.observableArrayList();
 
     @FXML
     private void initialize(){

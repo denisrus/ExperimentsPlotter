@@ -58,14 +58,27 @@ public class ChartsController {
     private int displayGeneStart = 0;
     private IntegerProperty displayGeneSize = new SimpleIntegerProperty(50);
 
+    private ExperimentsData data;
+    private int experimentNumber = 0;
+
+    private List<Color> clusterColorsList = new ArrayList<>();
+
+    private static final int MULTIPLIER = 10;
+    private static final String POINT_INFORMATION_TEXT = "Point information: ";
+    private static final String POINT_INFORMATION_PLACEHOLDER_TEXT = "Select point to display information";
+    private static final String POINT_CLUSTER_NUMBER_PROPERTY = "clusterNumber";
+    private static final String POINT_CLUSTER_GEN_PROPERTY = "clusterGen";
+    private static final String POINT_CLUSTER_SAMPLE_PROPERTY = "clusterSample";
+    private static final String POINT_CLUSTER_TIME_PROPERTY = "clusterTime";
+
+    private Crosshair3D crosshair3DSelection = null;
+
     public int getDisplayGeneStartPercent() {
         return displayGeneStartPercent.get();
     }
-
     public IntegerProperty displayGeneStartPercentProperty() {
         return displayGeneStartPercent;
     }
-
     public void setDisplayGeneStartPercent(int displayGeneStartPercent) {
         this.displayGeneStartPercent.set(displayGeneStartPercent);
     }
@@ -80,17 +93,19 @@ public class ChartsController {
         this.displayGeneSize.set(displayGeneSize);
     }
 
-    private List<Color> clusterColorsList = new ArrayList<>();
+    public ExperimentsData getData() {
+        return data;
+    }
+    public void setData(ExperimentsData data) {
+        this.data = data;
+    }
 
-    private static final int MULTIPLIER = 10;
-    private static final String POINT_INFORMATION_TEXT = "Point information: ";
-    private static final String POINT_INFORMATION_PLACEHOLDER_TEXT = "Select point to display information";
-    private static final String POINT_CLUSTER_NUMBER_PROPERTY = "clusterNumber";
-    private static final String POINT_CLUSTER_GEN_PROPERTY = "clusterGen";
-    private static final String POINT_CLUSTER_SAMPLE_PROPERTY = "clusterSample";
-    private static final String POINT_CLUSTER_TIME_PROPERTY = "clusterTime";
-
-    private Crosshair3D crosshair3DSelection = null;
+    public int getExperimentNumber() {
+        return experimentNumber;
+    }
+    public void setExperimentNumber(int experimentNumber) {
+        this.experimentNumber = experimentNumber;
+    }
 
     @FXML
     private void initialize(){
@@ -205,7 +220,7 @@ public class ChartsController {
             if (val == 0) {
                 val = 1;
             }
-            displayGeneStart = map(val, 1, 100, 0, genesCount);
+            displayGeneStart = mapRange(val, 1, 100, 0, genesCount);
             displayPlot();
         });
         displayGeneSize.addListener(observable -> {
@@ -221,7 +236,7 @@ public class ChartsController {
             if (val == 0) {
                 val = 1;
             }
-            displayGeneStart = map(val, 1, 100, 0, genesCount);
+            displayGeneStart = mapRange(val, 1, 100, 0, genesCount);
             displayPlot();
         });
     }
@@ -259,26 +274,6 @@ public class ChartsController {
         setupCameraAndLight();
         ((Group) graphSubScene.getRoot()).getChildren().clear();
     }
-
-    private ExperimentsData data;
-    private int experimentNumber = 0;
-
-    public ExperimentsData getData() {
-        return data;
-    }
-
-    public void setData(ExperimentsData data) {
-        this.data = data;
-    }
-
-    public int getExperimentNumber() {
-        return experimentNumber;
-    }
-
-    public void setExperimentNumber(int experimentNumber) {
-        this.experimentNumber = experimentNumber;
-    }
-
     public void displayPlot() {
         ((Group) graphSubScene.getRoot()).getChildren().clear();
         if (data == null || experimentNumber >= data.getExperiments().size()) {
@@ -384,7 +379,7 @@ public class ChartsController {
         final Group grid = createGrid(genesCount*MULTIPLIER+MULTIPLIER,
                 samples.size()*MULTIPLIER+MULTIPLIER, times.size()*MULTIPLIER+MULTIPLIER,MULTIPLIER);
 
-        final Group axes = getAxes(2, genesCount*MULTIPLIER+MULTIPLIER,
+        final Group axes = createAxis(2, genesCount*MULTIPLIER+MULTIPLIER,
                 samples.size()*MULTIPLIER+MULTIPLIER, times.size()*MULTIPLIER+MULTIPLIER);
 
         ((Group) graphSubScene.getRoot()).getChildren().addAll(grid, axes, plot);
@@ -479,7 +474,6 @@ public class ChartsController {
         mesh.getFaceSmoothingGroups().addAll(smooth);
         return mesh;
     }
-
     @SuppressWarnings("SuspiciousNameCombination")
     private static Group createGrid(float sizeX, float sizeY, float sizeZ, float delta) {
         if (delta < 1) {
@@ -512,9 +506,8 @@ public class ChartsController {
 
         return new Group(meshViewXY,meshViewXZ, meshViewYZ);
     }
-
     @SuppressWarnings("SuspiciousNameCombination")
-    private static Group getAxes(double radius, double xAxisLength, double yAxisLength, double zAxisLength) {
+    private static Group createAxis(double radius, double xAxisLength, double yAxisLength, double zAxisLength) {
         Cylinder axisX = new Cylinder(radius, xAxisLength);
         axisX.getTransforms().addAll(new Rotate(90, Rotate.Z_AXIS), new Translate(0, -xAxisLength/2, 0));
         axisX.setMaterial(new PhongMaterial(Color.RED));
@@ -561,7 +554,7 @@ public class ChartsController {
         }
     }
 
-    private static int map(int s, int a1, int a2, int b1, int b2) {
+    private static int mapRange(int s, int a1, int a2, int b1, int b2) {
         return b1 + (s-a1)*(b2-b1)/(a2-a1);
     }
 
